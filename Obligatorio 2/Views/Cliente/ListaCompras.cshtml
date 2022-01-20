@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Obligatorio_P2.Compra>
+
+@{
+    ViewData["Title"] = "Compras";
+}
+
+<h1>Compras</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id compra
+            </th>
+            <th>
+                Actividad
+            </th>
+            <th>
+                Cantidad de entradas
+            </th>
+            <th>
+                Fecha de la compra
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Precio final de la compra
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actividad.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadEntradas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaHoraCompra)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                $@item.CalcularPrecioFinalCompra().ToString("N2")
+            </td>
+            <td>
+                @if (item.Estado != false && item.Actividad.FechaHora>DateTime.Now.AddDays(1))
+                {
+                    @Html.ActionLink("Cancelar", "Cancelar", new { id = item.IdCompra })
+                }
+            </td>
+        
+        </tr>  
+        }
+    </tbody>
+</table>

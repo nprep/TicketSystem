@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Obligatorio_P2.Cliente>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Ver Todos los Clientes Ordenados por Apellido</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Id Cliente
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Username
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Rol
+            </th>
+
+            <th>
+                email
+            </th>
+            <th>
+               Fecha de Nacimiento
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rol)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNacimiento)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

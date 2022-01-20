@@ -1,0 +1,32 @@
+﻿<h1>Login</h1>
+
+
+
+<form method="post" id="formularioLogin">
+
+    <label>Email</label><br>
+    <input type="email" name="email" id="email" required><br>
+    <label>Password</label><br>
+    <input type="password" name="password" id="password" required><br>
+    <input type="submit" value="Login">
+
+</form>
+
+<p id="pMensaje">@ViewBag.Resultado</p>
+
+@section Scripts{ 
+
+    <script>
+        document.querySelector("#formularioLogin").addEventListener("submit", validarFormulario);
+        function validarFormulario(evt) {
+            evt.preventDefault();
+            let email = document.querySelector("#email").value;
+            let pass = document.querySelector("#password").value;
+            if (email != "" && pass != "") {
+                this.submit();
+            } else {
+                document.querySelector("#Resultado").innerHTML = "Debe ingresar un dato válido";
+            }
+        }
+    </script>
+}

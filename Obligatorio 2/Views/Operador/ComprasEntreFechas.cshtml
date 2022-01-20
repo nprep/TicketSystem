@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Obligatorio_P2.Compra>
+
+@{
+    ViewData["Title"] = "Compras";
+}
+
+<h1>Compras entre Fechas</h1>
+
+
+<form method="post" id="comprasentrefechas">
+
+
+    <label>Ingrese una fecha</label>
+    <input type="date" name="f1" id="fecha1" /><br />
+
+    <label>Ingrese otra fecha</label>
+    <input type="date" name="f2" id="fecha2" /><br />
+
+    <input type="submit" value="Mostrar Lista">
+
+</form>
+
+<p id="pMensaje">@ViewBag.Resultado</p>
+<p id="error">@ViewBag.Error</p>
+
+@if (Model != null)
+            {
+
+            
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id compra
+            </th>
+            <th>
+                Cantidad de entradas
+            </th>
+            <th>
+                Fecha y hora de la compra 
+            </th>
+            <th>
+                Estado
+            </th>
+            <th>
+                Precio Final Compra
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CantidadEntradas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHoraCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estado)
+                </td>
+                <td>
+                    @item.CalcularPrecioFinalCompra()
+                </td>
+            </tr>
+
+        }
+
+        <tr>
+            <td>
+                Suma Total de las Compras
+            </td>
+
+            <td>
+                $@ViewBag.Suma
+            </td>
+
+        </tr>
+
+
+
+    </tbody>
+</table>
+}
+
+@section Scripts{
+
+    <script>
+        document.querySelector("#comprasentrefechas").addEventListener("submit", ComprasEntreFechas);
+        function ComprasEntreFechas(evt) {
+            evt.preventDefault();
+            let date1 = document.querySelector("#fecha1").value;
+            let date2 = document.querySelector("#fecha2").value;
+            if (date1 != "" && date2 != "") {
+                this.submit();
+            } else {
+
+                document.querySelector("#pMensaje").innerHTML = "Debe ingresar las 2 fechas";
+                document.querySelector("#error").innerHTML = "";
+
+            }
+        }
+    </script>
+}

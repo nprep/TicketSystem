@@ -1,0 +1,13 @@
+﻿<h1>Realmente desea cancelar?@ViewBag.Compra.Actividad.Nombre</h1>
+
+<form method="post">
+    <label>ID</label><br>
+    <input type="text" name="id" value="@ViewBag.Compra.IdCompra" readonly><br>
+    <label>Título</label><br>
+    <input type="text" name="nombre" value="@ViewBag.Compra.Actividad.Nombre" readonly><br>
+    
+    <input type="submit" name="cancelar" value="cancelar" />
+
+</form>
+
+@ViewBag.Resultado

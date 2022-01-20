@@ -1,0 +1,30 @@
+﻿<h1>Comprar</h1>
+
+<h3>Datos de la compra</h3>
+
+<form method="post" id="cantidadEntradas">
+
+    <label>ID</label><br>
+    <input type="text" name="id" value="@ViewBag.Actividad.IdActividad" readonly><br>
+
+    <label>Título</label><br>
+    <input type="text" name="nombre" value="@ViewBag.Actividad.Nombre" readonly><br>
+
+    <label>Cantidad de Entradas</label><br>
+    <input type="number" id="cantidadEntradas" name="cant" value="Cantidad Entradas"><br>
+
+    <label>Costo de cada entrada</label><br>
+    <input type="text" name="costo" value="$@ViewBag.Actividad.CalcularCosto().ToString("N2")" readonly><br>
+
+    <input type="submit" value="Comprar">
+
+</form>
+
+@ViewBag.Resultado
+
+@section Scripts{ 
+    <script>
+        document.querySelector("#cantidadEntradas").addEventListener("change", devolverPrecioTotal);
+
+    </script>
+}

@@ -1,0 +1,51 @@
+﻿<h1>Alta de usuario</h1>
+
+
+
+<form method="post" id="formularioRegistro">
+
+    <label>Nombre</label><br>
+    <input type="text" name="nombre" id="nombre"><br>
+    <label>Apellido</label><br>
+    <input type="text" name="apellido" id="apellido"><br>
+    <label>Fecha de nacimiento</label>
+    <input type="date" name="fechaNac" id="fechaNac" /><br />
+
+    <label>Email</label><br>
+    <input type="email" name="email" id="email"><br>
+
+
+    <label>Nombre de usuario</label><br>
+    <input type="text" name="username" id="username"><br>
+
+    <label>Password</label><br>
+    <input type="password" name="password" id="password"><br>
+
+    <input type="submit" value="Dar de alta">
+
+</form>
+
+<p id="pMensaje">@ViewBag.Resultado</p>
+
+
+
+@section Scripts{ 
+
+    <script>
+        document.querySelector("#formularioRegistro").addEventListener("submit", validarFormulario);
+        function validarFormulario(evt) {
+            evt.preventDefault();
+            let nom = document.querySelector("#nombre").value;
+            let ape = document.querySelector("#apellido").value;
+            let email = document.querySelector("#email").value;
+            let nomUsuario = document.querySelector("#username").value;
+            let pass = document.querySelector("#password").value;
+
+            if (nom != "" && ape != "" && email != "" && nomUsuario != "" && pass != "") {
+                this.submit();
+            } else {
+                document.querySelector("#Resultado").innerHTML = "Ingrese algún dato válido";
+            }
+        }
+    </script>
+}

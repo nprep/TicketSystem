@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model IEnumerable<Obligatorio_P2.Actividad>
+
+@{
+    ViewData["Title"] = "Actividades";
+}
+
+<h1>Actividades</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id Actividad
+            </th>
+            <th>
+                Actividad
+            </th>
+            <th>
+                Fecha y hora
+            </th>
+            <th>
+                Edad mínima
+            </th>
+            <th>
+                Costo Actividad
+            </th>
+            <th>
+                "Megustas"
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdActividad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EdadMinima)
+                </td>
+                <td>
+                   $ @item.CalcularCosto().ToString("N2")
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.meGustaValor)
+                </td>
+                <td>
+
+                    @if (Context.Session.GetString("logueadoRol") == "cliente")
+                    {
+                        @Html.ActionLink("Comprar", "Comprar", "Cliente", new { id = item.IdActividad })<span> | </span>
+                        @Html.ActionLink("Me Gusta", "MeGusta", "Home", new { id = item.IdActividad })
+                    }
+
+
+          
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

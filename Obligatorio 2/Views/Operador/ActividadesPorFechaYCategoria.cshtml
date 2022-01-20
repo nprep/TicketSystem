@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Obligatorio_P2.Actividad>
+
+@{
+    ViewData["Title"] = "ActividadesPorFechaYCategoria";
+}
+
+<h1>Actividades Por Fecha Y Categoria</h1>
+
+@if (Model == null)
+{
+
+    <form method="post" id="ActividadesFechaYCategoria">
+
+
+        <label>Seleccione una categoría</label>
+
+        <select name="nombre">
+
+            @foreach (var cat in ViewBag.categorias)
+            {
+                <option value="@cat.Nombre">@cat.Nombre</option>
+            }
+        </select><br>
+
+        <label>Ingrese una fecha</label>
+        <input type="date" name="f1" id="fecha1" /><br>
+
+        <label>Ingrese otra fecha</label>
+        <input type="date" name="f2" id="fecha2" /><br>
+
+        <input type="submit" value="Mostrar Lista">
+
+
+    </form>
+    <p id="pMensaje"></p>
+
+}
+
+
+
+@if (Model != null)
+{
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id actividad
+                </th>
+                <th>
+                    Actividad
+                </th>
+                <th>
+                    Fecha y hora de la actividad
+                </th>
+                <th>
+                    Edad mínima
+                </th>
+                <th>
+                    Me gusta
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdActividad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaHora)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EdadMinima)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.meGustaValor)
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p id="error">@ViewBag.Error</p>
+}
+@section Scripts{
+
+    <script>
+        document.querySelector("#ActividadesFechaYCategoria").addEventListener("submit", ActividadesFechaYCategoria);
+        function ActividadesFechaYCategoria(evt) {
+            evt.preventDefault();
+            let date1 = document.querySelector("#fecha1").value;
+            let date2 = document.querySelector("#fecha2").value;
+            if (date1 != "" && date2 != "") {
+                this.submit();
+            } else {
+
+                document.querySelector("#pMensaje").innerHTML = "Debe ingresar las 2 fechas";
+                document.querySelector("#error").innerHTML = "";
+
+            }
+        }
+    </script>
+}

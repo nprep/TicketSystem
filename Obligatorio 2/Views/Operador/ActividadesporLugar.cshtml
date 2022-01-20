@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Obligatorio_P2.Actividad>
+
+@{
+    ViewData["Title"] = "Actividades";
+}
+
+<h1>Lista de Actividades por Lugar</h1>
+
+@if (Model == null) {
+
+    <form method="post" id="actividades por lugar">
+
+
+        <label>Seleccione un lugar</label>
+
+        <select name="nombre">
+            @foreach (var l in ViewBag.lugares)
+            {
+                <option value="@l.Nombre">@l.Nombre</option>
+            }
+        </select>
+
+
+        <input type="submit" value="Mostrar Lista">
+
+    </form>
+}
+
+@if (Model != null)
+{
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id actividad
+                </th>
+                <th>
+                    Actividad
+                </th>
+                <th>
+                    Fecha y hora de la actividad
+                </th>
+                <th>
+                    Edad mínima
+                </th>
+                <th>
+                    Me gusta
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdActividad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaHora)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EdadMinima)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.meGustaValor)
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>@ViewBag.Error</p>
+}
